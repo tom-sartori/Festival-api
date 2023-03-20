@@ -1,5 +1,6 @@
 package org.acme.model.dto.festival;
 
+import org.acme.model.entity.User;
 import org.bson.types.ObjectId;
 
 import java.util.Objects;
@@ -11,6 +12,13 @@ public class VolunteerDto {
     private String email;
 
     public VolunteerDto() {
+    }
+
+    public VolunteerDto(User user) {
+        this.id = user.getId();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.email = user.getEmail();
     }
 
     public ObjectId getId() {

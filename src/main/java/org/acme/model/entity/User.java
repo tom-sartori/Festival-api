@@ -12,6 +12,7 @@ import static org.acme.constant.DbCollections.USER_COLLECTION;
 public class User {
 
 	private ObjectId id;
+	private boolean admin;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -25,6 +26,14 @@ public class User {
 
 	public void setId(ObjectId id) {
 		this.id = id;
+	}
+
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
 	}
 
 	public String getFirstName() {
@@ -59,17 +68,16 @@ public class User {
 		this.password = password;
 	}
 
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 		User user = (User) o;
-		return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
+		return admin == user.admin && Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, firstName, lastName, email, password);
+		return Objects.hash(id, admin, firstName, lastName, email, password);
 	}
 }

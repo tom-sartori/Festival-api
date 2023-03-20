@@ -8,6 +8,7 @@ import java.util.Objects;
 public class UserDto {
 
     private ObjectId id;
+    private boolean admin;
     private String firstName;
     private String lastName;
     private String email;
@@ -18,6 +19,7 @@ public class UserDto {
 
     public UserDto(User user) {
         this.id = user.getId();
+        this.admin = user.isAdmin();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.email = user.getEmail();
@@ -38,6 +40,14 @@ public class UserDto {
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     public void setFirstName(String firstName) {
@@ -73,11 +83,11 @@ public class UserDto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserDto userDto = (UserDto) o;
-        return Objects.equals(id, userDto.id) && Objects.equals(firstName, userDto.firstName) && Objects.equals(lastName, userDto.lastName) && Objects.equals(email, userDto.email) && Objects.equals(token, userDto.token);
+        return admin == userDto.admin && Objects.equals(id, userDto.id) && Objects.equals(firstName, userDto.firstName) && Objects.equals(lastName, userDto.lastName) && Objects.equals(email, userDto.email) && Objects.equals(token, userDto.token);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, email, token);
+        return Objects.hash(id, admin, firstName, lastName, email, token);
     }
 }

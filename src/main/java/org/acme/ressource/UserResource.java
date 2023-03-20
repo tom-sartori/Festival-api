@@ -1,5 +1,6 @@
 package org.acme.ressource;
 
+import org.acme.mapper.UserMapper;
 import org.acme.model.entity.User;
 import org.acme.repository.UserRepository;
 import org.bson.types.ObjectId;
@@ -11,8 +12,6 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import java.util.List;
 
 import static org.acme.constant.ApiPaths.*;
 
@@ -26,6 +25,9 @@ import static org.acme.constant.ApiPaths.*;
 @ApplicationScoped
 public class UserResource {
 
+	@Inject
+	UserMapper userMapper;
+
 	private final UserRepository userRepository;
 
 	@Inject
@@ -35,24 +37,34 @@ public class UserResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<User> getUsers() {
-		return userRepository.listAll();
+	public Response getUsers() {
+		return Response
+				.status(200)
+				.entity(userMapper.toDto(userRepository.listAll()))
+				.build();
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public User getUser(@PathParam("id") String id) {
-		return userRepository.findById(new ObjectId(id));
+	public Response getUser(@PathParam("id") ObjectId id) {
+		return Response
+				.status(200)
+				.entity(userMapper.toDto(userRepository.findById(id)))
+				.build();
 	}
 
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void updateUser(@PathParam("id") String id, User user) {
-		user.setId(new ObjectId(id));
+	public Response updateUser(@PathParam("id") ObjectId id, User user) {
+		user.setId(id);
 		userRepository.update(user);
+		return Response
+				.status(200)
+				.entity(userMapper.toDto(user))
+				.build();
 	}
 
 	@POST
@@ -75,8 +87,10 @@ public class UserResource {
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void deleteUser(@PathParam("id") String id) {
-		User user = userRepository.findById(new ObjectId(id));
-		userRepository.delete(user);
+	public Response deleteUser(@PathParam("id") ObjectId id) {
+		userRepository.deleteById(id);
+		return Response
+				.status(204)
+				.build();
 	}
 }

@@ -1,19 +1,15 @@
 package org.acme.model.entity.festival;
 
-import io.quarkus.mongodb.panache.MongoEntity;
 import org.bson.types.ObjectId;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-import static org.acme.constant.DbCollections.FESTIVAL_COLLECTION;
-
-@MongoEntity(collection = FESTIVAL_COLLECTION)
 
 public class Zone {
     private String name;
     private int nbVolunteerNeeded;
-    private Set<ObjectId> volunteerRefs;
+    private List<ObjectId> volunteerRefs;
 
     public Zone() {
     }
@@ -34,11 +30,11 @@ public class Zone {
         this.nbVolunteerNeeded = nbVolunteerNeeded;
     }
 
-    public Set<ObjectId> getVolunteerRefs() {
+    public List<ObjectId> getVolunteerRefs() {
         return volunteerRefs;
     }
 
-    public void setVolunteerRefs(Set<ObjectId> volunteerRefs) {
+    public void setVolunteerRefs(List<ObjectId> volunteerRefs) {
         this.volunteerRefs = volunteerRefs;
     }
 

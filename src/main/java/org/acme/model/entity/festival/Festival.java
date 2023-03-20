@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
-public class festival {
+public class Festival {
 
     private ObjectId id;
     private String name;
@@ -14,7 +14,7 @@ public class festival {
     private boolean isActive;
     private Day[] days;
 
-    public festival() {
+    public Festival() {
     }
 
     public ObjectId getId() {
@@ -61,7 +61,7 @@ public class festival {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        festival festival = (festival) o;
+        Festival festival = (Festival) o;
         return isActive == festival.isActive && Objects.equals(id, festival.id) && Objects.equals(name, festival.name) && Objects.equals(startDate, festival.startDate) && Arrays.equals(days, festival.days);
     }
 

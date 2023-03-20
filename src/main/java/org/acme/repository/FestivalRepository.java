@@ -1,5 +1,6 @@
 package org.acme.repository;
 
+
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
 import org.acme.model.entity.festival.Festival;
 

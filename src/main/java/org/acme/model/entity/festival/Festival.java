@@ -1,18 +1,22 @@
 package org.acme.model.entity.festival;
 
+import io.quarkus.mongodb.panache.MongoEntity;
 import org.bson.types.ObjectId;
 
-import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
+import static org.acme.constant.DbCollections.FESTIVAL_COLLECTION;
+
+@MongoEntity(collection = FESTIVAL_COLLECTION)
 public class Festival {
 
     private ObjectId id;
     private String name;
     private Date startDate;
-    private boolean isActive;
-    private Day[] days;
+    private boolean active;
+    private List<Day> days;
 
     public Festival() {
     }
@@ -42,18 +46,18 @@ public class Festival {
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
-    public Day[] getDays() {
+    public List<Day> getDays() {
         return days;
     }
 
-    public void setDays(Day[] days) {
+    public void setDays(List<Day> days) {
         this.days = days;
     }
 
@@ -62,13 +66,11 @@ public class Festival {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Festival festival = (Festival) o;
-        return isActive == festival.isActive && Objects.equals(id, festival.id) && Objects.equals(name, festival.name) && Objects.equals(startDate, festival.startDate) && Arrays.equals(days, festival.days);
+        return active == festival.active && Objects.equals(id, festival.id) && Objects.equals(name, festival.name) && Objects.equals(startDate, festival.startDate) && Objects.equals(days, festival.days);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(id, name, startDate, isActive);
-        result = 31 * result + Arrays.hashCode(days);
-        return result;
+        return Objects.hash(id, name, startDate, active, days);
     }
 }

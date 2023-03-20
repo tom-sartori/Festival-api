@@ -1,6 +1,6 @@
 package org.acme.model.entity.festival;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Day {
@@ -8,7 +8,7 @@ public class Day {
     private String name;
     private String startHour;
     private String endHour;
-    private Slot[] slots;
+    private List<Slot> slots;
 
     public Day() {
     }
@@ -37,11 +37,11 @@ public class Day {
         this.endHour = endHour;
     }
 
-    public Slot[] getSlots() {
+    public List<Slot> getSlots() {
         return slots;
     }
 
-    public void setSlots(Slot[] slots) {
+    public void setSlots(List<Slot> slots) {
         this.slots = slots;
     }
 
@@ -50,13 +50,11 @@ public class Day {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Day day = (Day) o;
-        return Objects.equals(name, day.name) && Objects.equals(startHour, day.startHour) && Objects.equals(endHour, day.endHour) && Arrays.equals(slots, day.slots);
+        return Objects.equals(name, day.name) && Objects.equals(startHour, day.startHour) && Objects.equals(endHour, day.endHour) && Objects.equals(slots, day.slots);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(name, startHour, endHour);
-        result = 31 * result + Arrays.hashCode(slots);
-        return result;
+        return Objects.hash(name, startHour, endHour, slots);
     }
 }

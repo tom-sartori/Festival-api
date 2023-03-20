@@ -1,5 +1,7 @@
 package org.acme.model.dto.festival;
 
+import org.acme.model.entity.festival.Day;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -10,6 +12,13 @@ public class DayDto {
     private List<SlotDto> slots;
 
     public DayDto() {
+    }
+
+    public DayDto(Day day, List<SlotDto> slotDtoList) {
+        this.name = day.getName();
+        this.startHour = day.getStartHour();
+        this.endHour = day.getEndHour();
+        this.slots = slotDtoList;
     }
 
     public String getName() {

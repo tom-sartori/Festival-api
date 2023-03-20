@@ -1,5 +1,7 @@
 package org.acme.model.dto.festival;
 
+import org.acme.model.entity.festival.Slot;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -9,6 +11,12 @@ public class SlotDto {
     private List<ZoneDto> zones;
 
     public SlotDto() {
+    }
+
+    public SlotDto(Slot slot, List<ZoneDto> zoneDtoList) {
+        this.startHour = slot.getStartHour();
+        this.endHour = slot.getEndHour();
+        this.zones = zoneDtoList;
     }
 
     public String getStartHour() {

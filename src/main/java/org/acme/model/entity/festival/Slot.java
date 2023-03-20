@@ -1,13 +1,13 @@
 package org.acme.model.entity.festival;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class Slot {
 
     private String startHour;
     private String endHour;
-    private Zone[] zones;
+    private List<Zone> zones;
 
     public Slot() {
     }
@@ -28,11 +28,11 @@ public class Slot {
         this.endHour = endHour;
     }
 
-    public Zone[] getZones() {
+    public List<Zone> getZones() {
         return zones;
     }
 
-    public void setZones(Zone[] zones) {
+    public void setZones(List<Zone> zones) {
         this.zones = zones;
     }
 
@@ -41,13 +41,11 @@ public class Slot {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Slot slot = (Slot) o;
-        return Objects.equals(startHour, slot.startHour) && Objects.equals(endHour, slot.endHour) && Arrays.equals(zones, slot.zones);
+        return Objects.equals(startHour, slot.startHour) && Objects.equals(endHour, slot.endHour) && Objects.equals(zones, slot.zones);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(startHour, endHour);
-        result = 31 * result + Arrays.hashCode(zones);
-        return result;
+        return Objects.hash(startHour, endHour, zones);
     }
 }

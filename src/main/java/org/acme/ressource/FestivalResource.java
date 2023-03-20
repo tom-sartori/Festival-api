@@ -1,5 +1,6 @@
 package org.acme.ressource;
 
+import org.acme.mapper.FestivalMapper;
 import org.acme.model.entity.festival.Festival;
 import org.acme.repository.FestivalRepository;
 import org.bson.types.ObjectId;
@@ -16,6 +17,9 @@ import static org.acme.constant.ApiPaths.FESTIVAL;
 @ApplicationScoped
 public class FestivalResource {
 
+    @Inject
+    FestivalMapper festivalMapper;
+
     private final FestivalRepository festivalRepository;
 
     @Inject
@@ -30,7 +34,7 @@ public class FestivalResource {
         festivalRepository.persist(festival);
         return Response
                 .status(201)
-                .entity(festival)
+                .entity(festivalMapper.toDto(festival))
                 .build();
     }
 
@@ -40,22 +44,22 @@ public class FestivalResource {
     public Response read() {
         return Response
                 .status(200)
-                .entity(festivalRepository.findAll())
+                .entity(festivalMapper.toDto(festivalRepository.listAll()))
                 .build();
     }
 
     @GET
     @Produces("application/json")
-    @Path("/id/{id}")
+    @Path("/{id}")
     @PermitAll
     public Response read(@PathParam("id") String id) {
         return Response
                 .status(200)
-                .entity(festivalRepository.findById(new ObjectId(id)))
+                .entity(festivalMapper.toDto(festivalRepository.findById(new ObjectId(id))))
                 .build();
     }
 
-    @PATCH
+    @PUT
     @Consumes("application/json")
     @Produces("application/json")
     @Path("/{id}")
@@ -64,14 +68,16 @@ public class FestivalResource {
         festivalRepository.update(festival);
         return Response
                 .status(200)
-                .entity(festival)
+                .entity(festivalMapper.toDto(festival))
                 .build();
     }
 
     @DELETE
+    @Consumes("*/*")
+    @Produces("*/*")
     @Path("/{id}")
-    public Response delete(@PathParam("id") String id) {
-        festivalRepository.deleteById(new ObjectId(id));
+    public Response delete(@PathParam("id") ObjectId id) {
+        festivalRepository.deleteById(id);
         return Response
                 .status(204)
                 .build();

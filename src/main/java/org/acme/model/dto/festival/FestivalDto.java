@@ -18,6 +18,14 @@ public class FestivalDto {
     public FestivalDto() {
     }
 
+    public FestivalDto(Festival festival, List<DayDto> dayDtoList) {
+        this.id = festival.getId();
+        this.name = festival.getName();
+        this.startDate = festival.getStartDate();
+        this.active = festival.isActive();
+        this.days = dayDtoList;
+    }
+
     public ObjectId getId() {
         return id;
     }

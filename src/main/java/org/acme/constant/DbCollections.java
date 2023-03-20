@@ -10,4 +10,5 @@ public final class DbCollections {
 	public static final String VOLUNTEERS_COLLECTION = "volunteers";
 	public static final String GAMES_COLLECTION = "games";
 	public static final String ZONES_COLLECTION = "zones";
+	public static final String FESTIVAL_COLLECTION = "festivals";
 }

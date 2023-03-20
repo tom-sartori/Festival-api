@@ -1,7 +1,7 @@
 package org.acme.ressource;
 
-import org.acme.mapper.UserMapper;
-import org.acme.model.entity.User;
+import org.acme.model.mapper.UserMapper;
+import org.acme.model.collection.user.User;
 import org.acme.repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.eclipse.microprofile.openapi.annotations.enums.SecuritySchemeType;

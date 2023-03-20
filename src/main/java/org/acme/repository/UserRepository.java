@@ -3,8 +3,8 @@ package org.acme.repository;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
 import io.smallrye.jwt.build.Jwt;
 import org.acme.constant.Role;
-import org.acme.model.dto.UserDto;
-import org.acme.model.entity.User;
+import org.acme.model.dto.user.UserDto;
+import org.acme.model.collection.user.User;
 import org.mindrot.jbcrypt.BCrypt;
 
 import javax.enterprise.context.ApplicationScoped;

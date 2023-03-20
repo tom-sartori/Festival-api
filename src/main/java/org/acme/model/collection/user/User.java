@@ -1,4 +1,4 @@
-package org.acme.model.entity;
+package org.acme.model.collection.user;
 
 import io.quarkus.mongodb.panache.MongoEntity;
 import org.bson.types.ObjectId;

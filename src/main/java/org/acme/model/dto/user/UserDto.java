@@ -1,6 +1,6 @@
-package org.acme.model.dto;
+package org.acme.model.dto.user;
 
-import org.acme.model.entity.User;
+import org.acme.model.collection.user.User;
 import org.bson.types.ObjectId;
 
 import java.util.Objects;

@@ -1,6 +1,6 @@
 package org.acme.model.dto.festival;
 
-import org.acme.model.entity.festival.Day;
+import org.acme.model.collection.festival.Day;
 
 import java.util.List;
 import java.util.Objects;

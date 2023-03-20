@@ -1,7 +1,7 @@
-package org.acme.mapper;
+package org.acme.model.mapper;
 
-import org.acme.model.dto.UserDto;
-import org.acme.model.entity.User;
+import org.acme.model.dto.user.UserDto;
+import org.acme.model.collection.user.User;
 
 import javax.inject.Singleton;
 import java.util.List;

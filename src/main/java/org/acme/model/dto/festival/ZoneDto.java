@@ -1,6 +1,6 @@
 package org.acme.model.dto.festival;
 
-import org.acme.model.entity.festival.Zone;
+import org.acme.model.collection.festival.Zone;
 
 import java.util.List;
 import java.util.Objects;

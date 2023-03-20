@@ -1,6 +1,6 @@
 package org.acme.model.dto.festival;
 
-import org.acme.model.entity.festival.Festival;
+import org.acme.model.collection.festival.Festival;
 import org.bson.types.ObjectId;
 
 import java.util.Date;

@@ -1,11 +1,11 @@
-package org.acme.mapper;
+package org.acme.model.mapper;
 
 import org.acme.model.dto.festival.*;
-import org.acme.model.entity.User;
-import org.acme.model.entity.festival.Day;
-import org.acme.model.entity.festival.Festival;
-import org.acme.model.entity.festival.Slot;
-import org.acme.model.entity.festival.Zone;
+import org.acme.model.collection.user.User;
+import org.acme.model.collection.festival.Day;
+import org.acme.model.collection.festival.Festival;
+import org.acme.model.collection.festival.Slot;
+import org.acme.model.collection.festival.Zone;
 import org.acme.repository.UserRepository;
 import org.bson.types.ObjectId;
 

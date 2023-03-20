@@ -1,4 +1,4 @@
-package org.acme.model.entity.festival;
+package org.acme.model.collection.festival;
 
 import org.bson.types.ObjectId;
 

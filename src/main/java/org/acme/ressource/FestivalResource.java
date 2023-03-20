@@ -1,7 +1,7 @@
 package org.acme.ressource;
 
-import org.acme.mapper.FestivalMapper;
-import org.acme.model.entity.festival.Festival;
+import org.acme.model.mapper.FestivalMapper;
+import org.acme.model.collection.festival.Festival;
 import org.acme.repository.FestivalRepository;
 import org.bson.types.ObjectId;
 

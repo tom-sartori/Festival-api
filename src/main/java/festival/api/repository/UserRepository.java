@@ -34,6 +34,7 @@ public class UserRepository implements PanacheMongoRepository<User> {
      * @return A created response if the user was registered, a conflict response if the user already exists.
      */
     public Response register(User user) {
+        user.setEmail(user.getEmail().toLowerCase());
         if (user.getEmail() == null || user.getEmail().isEmpty()) {
             // The user does not have an email.
             return Response.status(Response.Status.BAD_REQUEST)
@@ -66,6 +67,7 @@ public class UserRepository implements PanacheMongoRepository<User> {
     }
 
     public Response login(User user) {
+        user.setEmail(user.getEmail().toLowerCase());
         if (user.getEmail() == null || user.getPassword() == null) {
             // The user does not have an email.
             return Response.status(Response.Status.UNAUTHORIZED)

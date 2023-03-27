@@ -9,18 +9,20 @@ import festival.api.model.dto.festival.*;
 import festival.api.repository.UserRepository;
 import org.bson.types.ObjectId;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
-@Singleton
+@ApplicationScoped
 public class FestivalMapper {
 
     @Inject
     UserRepository userRepository;
 
     public FestivalDto toDto(Festival festival) {
+        List<User> userList = userRepository.listAll();
+
         List<DayDto> dayDtoList = new ArrayList<>();
         for (Day day : festival.getDays()) {
 
@@ -32,11 +34,10 @@ public class FestivalMapper {
 
                     List<VolunteerDto> volunteerDtoList = new ArrayList<>();
                     for (ObjectId volunteerRef : zone.getVolunteerRefs()) {
-                        User user = userRepository.findById(volunteerRef);
-                        if (user != null) {
-                            VolunteerDto volunteerDto = new VolunteerDto(user);
-                            volunteerDtoList.add(volunteerDto);
-                        }
+                        userList.stream()
+                                .filter(u -> u.getId().equals(volunteerRef))
+                                .findFirst()
+                                .ifPresent(user -> volunteerDtoList.add(new VolunteerDto(user)));
                     }
                     zoneDtoList.add(new ZoneDto(zone, volunteerDtoList));
                 }
@@ -49,6 +50,35 @@ public class FestivalMapper {
     }
 
     public List<FestivalDto> toDto(List<Festival> festivalList) {
-        return festivalList.stream().map(this::toDto).toList();
+        List<FestivalDto> list = new ArrayList<>();
+        for (Festival festival : festivalList) {
+            FestivalDto festivalDto = toDto(festival);
+            list.add(festivalDto);
+        }
+        return list;
+    }
+
+    public Festival toEntity(FestivalDto festivalDto) {
+        List<Day> dayList = new ArrayList<>();
+        for (DayDto dayDto : festivalDto.getDays()) {
+
+            List<Slot> slotList = new ArrayList<>();
+            for (SlotDto slotDto : dayDto.getSlots()) {
+
+                List<Zone> zoneList = new ArrayList<>();
+                for (ZoneDto zoneDto : slotDto.getZones()) {
+
+                    List<ObjectId> volunteerRefList = new ArrayList<>();
+                    for (VolunteerDto volunteerDto : zoneDto.getVolunteers()) {
+                        volunteerRefList.add(volunteerDto.getId());
+                    }
+                    zoneList.add(new Zone(zoneDto, volunteerRefList));
+                }
+                slotList.add(new Slot(slotDto, zoneList));
+            }
+            dayList.add(new Day(dayDto, slotList));
+        }
+
+        return new Festival(festivalDto, dayList);
     }
 }

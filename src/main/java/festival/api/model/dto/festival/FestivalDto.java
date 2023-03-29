@@ -9,9 +9,9 @@ import java.util.Objects;
 
 public class FestivalDto {
 
-    private ObjectId id;
+    private String id;
     private String name;
-    private Date startDate;
+    private String startDate;
     private boolean active;
     private List<DayDto> days;
 
@@ -19,18 +19,18 @@ public class FestivalDto {
     }
 
     public FestivalDto(Festival festival, List<DayDto> dayDtoList) {
-        this.id = festival.getId();
+        this.id = festival.getId().toString();
         this.name = festival.getName();
         this.startDate = festival.getStartDate();
         this.active = festival.isActive();
         this.days = dayDtoList;
     }
 
-    public ObjectId getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(ObjectId id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -42,11 +42,11 @@ public class FestivalDto {
         this.name = name;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 

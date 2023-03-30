@@ -1,5 +1,6 @@
 package festival.api.model.collection.festival;
 
+import festival.api.model.dto.festival.FestivalDto;
 import io.quarkus.mongodb.panache.MongoEntity;
 import org.bson.types.ObjectId;
 
@@ -14,11 +15,24 @@ public class Festival {
 
     private ObjectId id;
     private String name;
-    private Date startDate;
+    private String startDate;
     private boolean active;
     private List<Day> days;
 
     public Festival() {
+    }
+
+    public Festival(FestivalDto festivalDto, List<Day> dayList) {
+        if (festivalDto.getId() == null || festivalDto.getId().isEmpty()) {
+            this.id = null;
+        }
+        else {
+            this.id = new ObjectId(festivalDto.getId());
+        }
+        this.name = festivalDto.getName();
+        this.startDate = festivalDto.getStartDate();
+        this.active = festivalDto.isActive();
+        this.days = dayList;
     }
 
     public ObjectId getId() {
@@ -37,11 +51,11 @@ public class Festival {
         this.name = name;
     }
 
-    public Date getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 

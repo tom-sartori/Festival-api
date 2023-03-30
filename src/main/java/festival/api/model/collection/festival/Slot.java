@@ -1,5 +1,7 @@
 package festival.api.model.collection.festival;
 
+import festival.api.model.dto.festival.SlotDto;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -10,6 +12,12 @@ public class Slot {
     private List<Zone> zones;
 
     public Slot() {
+    }
+
+    public Slot(SlotDto slotDto, List<Zone> zoneList) {
+        this.startHour = slotDto.getStartHour();
+        this.endHour = slotDto.getEndHour();
+        this.zones = zoneList;
     }
 
     public String getStartHour() {

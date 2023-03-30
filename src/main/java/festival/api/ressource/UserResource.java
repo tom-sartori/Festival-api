@@ -36,6 +36,7 @@ public class UserResource {
 	}
 
 	@GET
+	@Consumes("*/*")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getUsers() {
 		return Response

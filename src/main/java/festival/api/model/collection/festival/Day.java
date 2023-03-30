@@ -1,5 +1,7 @@
 package festival.api.model.collection.festival;
 
+import festival.api.model.dto.festival.DayDto;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -11,6 +13,13 @@ public class Day {
     private List<Slot> slots;
 
     public Day() {
+    }
+
+    public Day(DayDto dayDto, List<Slot> slotList) {
+        this.name = dayDto.getName();
+        this.startHour = dayDto.getStartHour();
+        this.endHour = dayDto.getEndHour();
+        this.slots = slotList;
     }
 
     public String getName() {

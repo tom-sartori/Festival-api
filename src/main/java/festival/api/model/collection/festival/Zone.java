@@ -1,5 +1,6 @@
 package festival.api.model.collection.festival;
 
+import festival.api.model.dto.festival.ZoneDto;
 import org.bson.types.ObjectId;
 
 import java.util.List;
@@ -12,6 +13,12 @@ public class Zone {
     private List<ObjectId> volunteerRefs;
 
     public Zone() {
+    }
+
+    public Zone(ZoneDto zoneDto, List<ObjectId> volunteerRefList) {
+        this.name = zoneDto.getName();
+        this.nbVolunteerNeeded = zoneDto.getNbVolunteerNeeded();
+        this.volunteerRefs = volunteerRefList;
     }
 
     public String getName() {
